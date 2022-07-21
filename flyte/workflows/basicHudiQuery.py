@@ -1,7 +1,7 @@
-from flytekit import Resources, task, workflow, kwtypes
+from flytekit import Resources, task, workflow
 from flytekitplugins.spark import Spark
 import flytekit
-from typing import Dict
+
 @task(
     task_config=Spark(
         # this configuration is applied to the spark cluster
@@ -23,21 +23,28 @@ from typing import Dict
     limits=Resources(mem="2000M"),
     cache_version="1",
 )
-def hudiQery() -> Dict[str, str]:
-    # if you run in local, you must set SPARK_LOCAL_IP=127.0.0.1. this connection to get jars dependences local file
+def hudiQery() -> str:
     spark = flytekit.current_context().spark_session
-    # hadoop 3.3.1
+    # configuring hadoop 3.3.1 access to s3 aws
     spark._jsc.hadoopConfiguration().set("fs.s3a.endpoint", "s3.ap-southeast-1.amazonaws.com")
     spark._jsc.hadoopConfiguration().set("fs.s3a.impl", "org.apache.hadoop.fs.s3a.S3AFileSystem")
     spark._jsc.hadoopConfiguration().set("fs.s3a.access.key", "AKIAZZQUVIBN74RMCUXK")
     spark._jsc.hadoopConfiguration().set("fs.s3a.secret.key", "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")
 
-    df = spark.read.format('org.apache.hudi').load('s3a://hudi-table/logs_mor' + '/*/*')
+    try:
+        # read data from s3
+        df = spark.read.format('org.apache.hudi').load('s3a://hudi-table/logs_mor' + '/*/*')
+        df.createOrReplaceTempView("hudi_trips_incremental")
 
-    return df.select("_hoodie_commit_time").collect()[0].asDict()
+        spark.sql("select `_hoodie_commit_time` from  hudi_trips_incremental").show()
+        return "Query executed"
+    except Exception as x:
+        print("Unable to process your query dude!!" + "\n" + "ERROR : " + str(x))
+        return "Query failed"
+
 
 @workflow
-def my_query_spark() -> Dict[str, str]:
+def my_query_spark() -> str:
     return hudiQery()
 
 if __name__ == "__main__":

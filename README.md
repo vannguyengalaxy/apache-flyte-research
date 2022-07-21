@@ -19,3 +19,4 @@ note:
  "spark.jars": "/home/ec2-user/flyte-test/flyte-project/jars/hadoop-aws-3.3.1.jar,"
                "/home/ec2-user/flyte-test/flyte-project/jars/aws-java-sdk-bundle-1.11.375.jar,"
                "/home/ec2-user/flyte-test/flyte-project/jars/hudi-spark3.2-bundle_2.12-0.11.0.jar",
+2. if you run in local, you must set SPARK_LOCAL_IP=127.0.0.1. this connection to get jars dependences local file
