@@ -1,4 +1,4 @@
-from flytekit import Resources, task, workflow
+from flytekit import Resources, task, workflow, kwtypes
 from flytekitplugins.spark import Spark
 import flytekit
 
@@ -32,10 +32,11 @@ def hudiQery() -> str:
     spark._jsc.hadoopConfiguration().set("fs.s3a.secret.key", "RSLqNpv2IuPkEokB/oM+FgMRhJLlT0vE05wiZyNh")
 
     try:
-        # read data from s3
+        # TODO: read data from s3
+        # create (or replaces if that view name exists) a lazily view that you can then use like a hive table in spa
+        # execute sql query
         df = spark.read.format('org.apache.hudi').load('s3a://hudi-table/logs_mor' + '/*/*')
         df.createOrReplaceTempView("hudi_trips_incremental")
-
         spark.sql("select `_hoodie_commit_time` from  hudi_trips_incremental").show()
         return "Query executed"
     except Exception as x:
