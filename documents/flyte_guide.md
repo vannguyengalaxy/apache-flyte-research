@@ -19,7 +19,11 @@
 
 * Step 3: Open this url (http://localhost:30081/console) on your browser.**
 ### 1.2. Flyte Native (AWS)
-#### 1.2.1. Setup connection to flytectl CLI
+
+#### 1.2.1. Deploy cluster 
+reference: [read in more detail](https://docs.flyte.org/en/latest/deployment/aws/manual.html#deployment-aws-manual)
+
+#### 1.2.2. Setup connection to flytectl CLI
 step 1: Install flytectl [(1.1.1)](####-1.1.1.-Install-flytectl-by-shell-script-and-set-environment-path)
 
 step 2: generate config file   
@@ -42,8 +46,7 @@ step 4: Use below config:
       show-source: true
       level: 0
 
-#### 1.2.2. Deploy cluster 
-reference: [read in more detail](https://docs.flyte.org/en/latest/deployment/aws/manual.html#deployment-aws-manual)
+
 ## 2. Setup a project
 * Prerequisites: make sure you have git and python >=3.7
 
