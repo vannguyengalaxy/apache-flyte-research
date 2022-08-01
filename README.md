@@ -4,7 +4,7 @@ A template for the recommended layout of a Flyte enabled repository for code wri
 
 ## Usage
 
-* running with your Flyte project
+* running with your Flyte project 
 Step 1: stet up connection with flytectl CLI
 
 `flytectl_connection.sh`
