@@ -2,14 +2,13 @@
 
 A template for the recommended layout of a Flyte enabled repository for code written in python using [flytekit](https://docs.flyte.org/projects/flytekit/en/latest/).
 
-## Usage
+## Usage (running with your Flyte project )
 
-* running with your Flyte project 
-Step 1: stet up connection with flytectl CLI
+* Step 1: stet up connection with flytectl CLI
 
 `flytectl_connection.sh`
 
-Step 2: Register workflow using local tgz file.
+* Step 2: Register workflow using local tgz file.
 
 `./register_workflow.sh -i <IMAGE_NAME> -r <DOCKER_REGISTRY> -v <VERSION> `
 
