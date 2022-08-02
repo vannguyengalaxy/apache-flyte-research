@@ -14,7 +14,7 @@ Step 1: package workflow.
 
 _example: ./package_workflow.sh.sh -i spark-sql -r ghcr.io/vannguyengalaxy -v v1_
 
-Step 2: Register workflow using local tgz file.
+Step 2: Register workflow using local tgz file. (_note: the image in the docker registry need to have public access_)
 
 
     flytectl register files --config ~/.flyte/config.yaml  --project <PROJECT_NAME> --domain <DOMAIN_NAME> --archive flyte-package.tgz --version <VERSION>
