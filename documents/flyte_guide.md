@@ -62,7 +62,7 @@ Step 3: create project
     pyflyte  init  <project_name>
 Then, the project directory will be created with a sample workflow. More instructions can be found in [this link](https://docs.flyte.org/projects/cookbook/en/stable/auto/larger_apps/larger_apps_setup.html)
 
-## 3. Register workflow 
+## 3. Register workflow
 Step 1: Build image
 
     ./docker_build_and_tag.sh -a <image_name> -r <docker_registry> -v <version>
