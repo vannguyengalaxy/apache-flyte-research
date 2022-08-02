@@ -5,7 +5,7 @@ yes | flytectl config init --host=$ADDRESS
 # replace content of config file
 cat << EOF > ~/.flyte/config.yaml
 admin:
-  endpoint: dns:///$(kubectl -n flyte get ingress|grep flyte-core-grpc |awk '{print $4}')
+  endpoint: dns:///$ADDRESS
   authType: Pkce
   insecure: false
   insecureSkipVerify: true
