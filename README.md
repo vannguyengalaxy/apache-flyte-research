@@ -4,15 +4,28 @@ A template for the recommended layout of a Flyte enabled repository for code wri
 
 ## Usage (running with your Flyte project )
 
-* Step 1: stet up connection with flytectl CLI
+*** **prerequisites**: make sure the connection with flytectl CLI is working
 
-`flytectl_connection.sh`
+
+    ./flytectl_connection.sh
+
+* Step 1: package workflow.
+
+
+    ./package_workflow.sh.sh -i <IMAGE_NAME> -r <DOCKER_REGISTRY> -v <VERSION>
+
+_example: ./package_workflow.sh.sh -i spark-sql -r ghcr.io/vannguyengalaxy -v v1_
 
 * Step 2: Register workflow using local tgz file.
 
-`./register_workflow.sh -i <IMAGE_NAME> -r <DOCKER_REGISTRY> -v <VERSION> `
 
-_example: ./register_workflow.sh -i spark-sql -r ghcr.io/vannguyengalaxy -v v1_
+    flytectl register files --config ~/.flyte/config.yaml  --project <PROJECT_NAME> --domain <DOMAIN_NAME> --archive flyte-package.tgz --version <VERSION>
+    
+
+_example: flytectl register files --config ~/.flyte/config.yaml  --project flytesnacks --domain development --archive flyte-package.tgz --version v1_
+
+* Step 3: Open Flyte UI and launch workflow
+
 
 ## NOTE
 
